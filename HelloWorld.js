@@ -33,7 +33,7 @@ class Clock extends React.Component {
     componentWillUnmount() {
       clearInterval(this.timerID);
     }
-  
+  z
     tick() {
       this.setState({
         date: new Date()
