@@ -18,10 +18,10 @@ function Welcome(props) {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 function App() {
     return (
-      <div>
+      <div style={{ fontSize: '10px' }}>
         <Welcome name="Sara" />
         <Welcome name="Cahal" />
-        <Welcome name="Edite" />
+        <Welcome name="Hauu" />
       </div>
     );
   }
@@ -39,6 +39,7 @@ function App() {
                 alt={props.author.name}
                 style={{width:'5%'}}
               />
+              <App /> 
               <div className="UserInfo-name">
                 {props.author.name}
               </div>
@@ -63,5 +64,6 @@ const comment = {
   };
 
 const element = <Comment date={comment.date} text={comment.text} author={comment.author} />;
+const e = <App /> 
 
 root.render(element);
