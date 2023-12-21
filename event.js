@@ -1,56 +1,76 @@
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-
 function Form() {
-    function handleSubmit(e) {
-      e.preventDefault();
-      console.log('You clicked submit.');
-    }
-  
-    return (
-      <form onSubmit={handleSubmit}>
-        <button type="submit">Submit</button>
-      </form>
-    );
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log('You clicked submit.');
   }
-  
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+
 class LoggingButton extends React.Component {
   handleClick() {
     console.log('this is:', this);
   }
 
   render() {
-    // Cú pháp này đảm bảo `this` được ràng buộc trong handleClick
     return (
-      <button onClick={() => this.handleClick()}>
+      <button onClick={this.handleClick}>
         Click me
       </button>
     );
   }
 }
-  
-  class Toggle extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = { isToggleOn: true };
-    }
-  
-    // Sử dụng arrow function để không cần phải bind "this"
-    handleClick = () => {
-      this.setState(prevState => ({
-        isToggleOn: !prevState.isToggleOn
-      }));
-    };
-    render() {
-      return (
-        <div>
-          <button onClick={this.handleClick}>
-            {this.state.isToggleOn ? 'ON' : 'OFF'}
-          </button>
-          <LoggingButton />
-        </div>
-      );
-    }
+
+function UserGreeting(props) {
+  return <h1>Welcome back</h1>;
+}
+
+function GuestGreeting(props) {
+  return <h1>Please sign up</h1>;
+}
+
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return <UserGreeting />;
   }
-      
-root.render (<Toggle />);
+  return <GuestGreeting />;
+}
+
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isToggleOn: true,
+      isLoggedIn: true,
+    };
+  }
+
+  handleClick = () => {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn,
+      isLoggedIn: !prevState.isLoggedIn,
+    }));
+  };
+
+  render() {
+    const { isLoggedIn } = this.state;
+    return (
+      <div>
+        <button onClick={this.handleClick}>
+          {this.state.isToggleOn ? 'ON' : 'OFF'}
+        </button>
+        <LoggingButton />
+        <Greeting isLoggedIn={isLoggedIn} />
+      </div>
+    );
+  }
+}
+
+root.render(<Toggle />);
