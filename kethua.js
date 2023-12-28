@@ -28,6 +28,13 @@ function FancyBorder(props) {
       this.state = {login: ''};
     }
   
+    handleChange(e) {
+      this.setState({login: e.target.value});
+    }
+  
+    handleSignUp() {
+      alert(`Welcome aboard, ${this.state.login}!`);
+    }
     render() {
       return (
         <Dialog title="Mars Exploration Program"
@@ -41,13 +48,6 @@ function FancyBorder(props) {
       );
     }
   
-    handleChange(e) {
-      this.setState({login: e.target.value});
-    }
-  
-    handleSignUp() {
-      alert(`Welcome aboard, ${this.state.login}!`);
-    }
   }
   
   const root = ReactDOM.createRoot(document.getElementById('root'));
